@@ -5,7 +5,7 @@ const router = express.Router()
 const Users = require('./auth-model')
 
 router.get('/', (req,res)=>{
-  res.json({message: "good job"});
+  res.status(200).json({message: "good job"});
 })
 
 router.post('/register', (req, res) => {
@@ -19,7 +19,7 @@ router.post('/register', (req, res) => {
       res.status(201).json(added);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({message:"nothing registered"});
     });
 });
 
@@ -40,7 +40,7 @@ router.post('/login', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({message:"try again"});
     });
 });
 
