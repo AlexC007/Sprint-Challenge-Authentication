@@ -6,8 +6,14 @@ const bycrpt = require("bcryptjs")
 
 
 const Users = require('../jokes/jokes-router')
+
 module.exports = (req, res, next) => {
-  const { username, password } = req.headers;
+  if(req.session && req.session.user){
+    next();
+  } else {
+    res.status(401).json({message:" Please sign in"})
+  }
+  /*const { username, password } = req.headers;
 
   if (username && password) {
     Users.findBy({ username })
@@ -24,5 +30,5 @@ module.exports = (req, res, next) => {
       });
   } else {
     res.status(400).json({ message: 'Please provide the necessary credentials' });
-  }
+  }*/
 };
